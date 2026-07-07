@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PHOTOFORGE — Fotón a materia</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='9' y='9' width='14' height='14' rx='1' transform='rotate(45 16 16)' fill='%23c9a86a'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+</head>
+<body data-state="idle">
+  <div id="scene-container"></div>
+
+  <div class="ui" aria-live="polite">
+    <!-- Marco de visor -->
+    <div class="bracket bracket-tl"></div>
+    <div class="bracket bracket-tr"></div>
+    <div class="bracket bracket-bl"></div>
+    <div class="bracket bracket-br"></div>
+
+    <header class="hud-top">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <h1>PHOTO<em>FORGE</em></h1>
+        <span class="brand-rev">MK·III</span>
+      </div>
+      <div class="status-chip">
+        <span class="status-dot"></span>
+        <span id="status-text">EN ESPERA</span>
+      </div>
+    </header>
+
+    <aside class="panel panel-job">
+      <div class="panel-head">
+        <span class="panel-index">01</span>
+        <h2>Nueva pieza</h2>
+      </div>
+
+      <div id="dropzone" class="dropzone" tabindex="0" role="button"
+           aria-label="Subir fotografía">
+        <svg class="dz-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <rect x="6" y="10" width="36" height="28" rx="3"
+                stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="17" cy="20" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 34l10-9 7 6 6-5 9 8" stroke="currentColor"
+                stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <p class="dz-title">Arrastra una fotografía</p>
+        <p class="dz-sub">o haz clic para explorar</p>
+        <input type="file" id="file-input" accept="image/*" hidden />
+      </div>
+
+      <div id="job-card" class="job-card hidden">
+        <img id="job-thumb" class="job-thumb" alt="Fotografía cargada" />
+        <div class="job-meta">
+          <span id="job-name" class="job-name">—</span>
+          <span id="job-size" class="job-size">—</span>
+        </div>
+      </div>
+
+      <dl class="readouts">
+        <div class="readout">
+          <dt>Capa</dt>
+          <dd><span id="layer-count">000</span><span class="dim">/512</span></dd>
+        </div>
+        <div class="readout">
+          <dt>Material</dt>
+          <dd>Resina fotónica</dd>
+        </div>
+        <div class="readout">
+          <dt>Restante</dt>
+          <dd id="time-left">—</dd>
+        </div>
+      </dl>
+
+      <div class="panel-actions">
+        <button id="btn-export" class="btn btn-primary" disabled>
+          Exportar <span class="ext">·GLB</span>
+        </button>
+        <button id="btn-reset" class="btn btn-ghost hidden">Nueva pieza</button>
+      </div>
+    </aside>
+
+    <footer class="hud-bottom">
+      <ol class="phases">
+        <li data-phase="upload"><i></i>Foto</li>
+        <li data-phase="analyze"><i></i>Análisis</li>
+        <li data-phase="print"><i></i>Impresión</li>
+        <li data-phase="export"><i></i>Exportación</li>
+      </ol>
+      <div class="progress-rail" role="progressbar" aria-valuemin="0"
+           aria-valuemax="100" aria-valuenow="0" id="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+        <div class="progress-spark" id="progress-spark"></div>
+      </div>
+      <span class="progress-pct" id="progress-pct">00.0%</span>
+    </footer>
+  </div>
+
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
